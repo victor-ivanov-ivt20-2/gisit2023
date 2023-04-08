@@ -1,9 +1,6 @@
 FROM node:18-alpine3.17 as build
 WORKDIR /app
-COPY . /app
-RUN npm install
-RUN export NODE_OPTIONS=--max-old-space-size=32768
-RUN npm run build
+COPY ./dist /app
 
 FROM ubuntu
 RUN apt-get update
