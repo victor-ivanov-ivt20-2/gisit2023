@@ -10,7 +10,7 @@ const GETUSER = gql`
     }
   }
 `;
-
+// rotebal
 const ME = gql`
   query Query {
     me {
