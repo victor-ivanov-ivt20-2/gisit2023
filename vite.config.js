@@ -13,7 +13,7 @@ export default defineConfig({
     port: 90,
     proxy: {
       "/socket.io": {
-        target: "ws://host.docker.internal:90",
+        target: "wss://host.docker.internal:90",
         ws: true,
       },
     }, // you can replace this port with any port
