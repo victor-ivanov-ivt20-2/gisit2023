@@ -3,11 +3,11 @@ version: "3.9"
 services:
   app:
     build: .
-    command: npm run dev
+    command: npm run dev -- --https
     image: myapp:latest
     container_name: myapp
     ports:
-      - "443:443"
+      - "443:80"
     volumes:
       - .:/app
       - /app/node_modules
