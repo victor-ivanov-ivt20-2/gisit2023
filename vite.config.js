@@ -12,4 +12,17 @@ export default defineConfig({
     strictPort: true,
     port: 5173, // you can replace this port with any port
   },
+  build: {
+    rollupOptions: {
+      maxParallelFileOps: 2,
+      output: {
+        sourcemap: true,
+        manualChunks: (id) => {
+          if (id.includes("node_modules")) {
+            return "vendor";
+          }
+        },
+      },
+    },
+  },
 });
