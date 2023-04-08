@@ -13,7 +13,7 @@ export default defineConfig({
     port: 90,
     hmr: {
       protocol: "wss",
-      host: "host.docker.internal",
+      host: "192.168.0.2",
       port: 90,
     },
     // you can replace this port with any port
