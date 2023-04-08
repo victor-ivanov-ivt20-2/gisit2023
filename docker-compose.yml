@@ -9,8 +9,6 @@ services:
     container_name: myapp
     ports:
       - "90:80"
-    environment:
-      - NODE_OPTIONS=--max-old-space-size=512
     volumes:
       - .:/app
       - /app/node_modules
