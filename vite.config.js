@@ -11,12 +11,12 @@ export default defineConfig({
     host: true, // needed for the Docker Container port mapping to work
     strictPort: true,
     port: 90,
-    proxy: {
-      "/socket.io": {
-        target: "wss://host.docker.internal:90",
-        ws: true,
-      },
-    }, // you can replace this port with any port
+    hmr: {
+      protocol: "wss",
+      host: "host.docker.internal",
+      port: 90,
+    },
+    // you can replace this port with any port
   },
   build: {
     rollupOptions: {
