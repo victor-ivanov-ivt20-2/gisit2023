@@ -16,6 +16,7 @@ export default defineConfig({
     rollupOptions: {
       maxParallelFileOps: 2,
       output: {
+        cache: false,
         sourcemap: true,
         manualChunks: (id) => {
           if (id.includes("node_modules")) {
