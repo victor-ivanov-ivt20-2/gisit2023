@@ -7,7 +7,7 @@ services:
     image: myapp:latest
     container_name: myapp
     ports:
-      - "82:90"
+      - "90:90"
     volumes:
       - .:/app
       - /app/node_modules
