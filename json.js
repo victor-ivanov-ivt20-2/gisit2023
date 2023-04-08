@@ -1,4 +1,3 @@
-import G from "./geo.json" assert { type: "json" };
 import * as fs from "fs";
 function epsg4326toEpsg3857(coordinates) {
   let x, y;
@@ -10,40 +9,40 @@ function epsg4326toEpsg3857(coordinates) {
   return [x, y];
 }
 
-fs.readFile("ya.json", (error, data) => {
+fs.readFile("./src/components/map/geo.json", (error, data) => {
   if (error) {
     console.log(error);
     throw error;
   }
 
   const geo = JSON.parse(data);
-
+  const temp = {
+    district: "",
+    coordinates: [],
+  };
   geo.features.forEach((f) => {
+    temp.district = f.properties.district;
     if (f.geometry.type === "Polygon")
       f.geometry.coordinates.forEach((element) => {
-        element.forEach((el) => {
-          const ans = epsg4326toEpsg3857([el[0], el[1]]);
-          el[0] = ans[0];
-          el[1] = ans[1];
-        });
+        temp.coordinates = element;
       });
     else
       f.geometry.coordinates.forEach((element) => {
         element.forEach((el) => {
           el.forEach((e) => {
-            const ans = epsg4326toEpsg3857([e[0], e[1]]);
-            e[0] = ans[0];
-            e[1] = ans[1];
+            temp.coordinates = e;
           });
         });
       });
-  });
-  const geoFinish = JSON.stringify(geo);
-  fs.writeFile("data.json", geoFinish, (error) => {
-    if (error) {
-      console.error(error);
-      throw error;
-    }
-    console.log("data.json written correctly");
+    const geoFinish = JSON.stringify(temp);
+    fs.writeFile("./data/" + temp.district + ".json", geoFinish, (error) => {
+      if (error) {
+        console.error(error);
+        throw error;
+      }
+      console.log("data.json written correctly");
+    });
+    temp.district = "";
+    temp.coordinates = [];
   });
 });

@@ -2,6 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Map from "../components/map/map";
+import Header from "../components/header";
 const GETUSER = gql`
   query User($userId: ID) {
     user(id: $userId) {
@@ -32,6 +33,7 @@ const MainPage = () => {
   }, [data]);
   return (
     <div>
+      <Header></Header>
       <Map />
     </div>
   );
