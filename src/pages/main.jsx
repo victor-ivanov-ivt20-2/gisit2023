@@ -32,13 +32,6 @@ const MainPage = () => {
   }, [data]);
   return (
     <div>
-      <button
-        onClick={() => {
-          dispatch(setActive(true));
-        }}
-      >
-        Создать модальное окно
-      </button>
       <Map />
     </div>
   );

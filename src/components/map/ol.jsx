@@ -5,22 +5,18 @@ import * as ol from "ol";
 const Map = ({ children, zoom, center, extent, projection }) => {
   const mapRef = useRef();
   const [map, setMap] = useState(null);
-
-  map.on("click", (evt) => {
-    const pixel = map.getEventPixel(evt.originalEvent);
-    const feature = map.forEachFeatureAtPixel(pixel, (f) => {
-      return f;
+  if (map) {
+    map.on("click", (evt) => {
+      const pixel = map.getEventPixel(evt.originalEvent);
+      const feature = map.forEachFeatureAtPixel(pixel, (f) => {
+        return f;
+      });
+      if (feature) {
+        alert(feature.values_.district);
+      }
     });
-    if (feature) {
-      console.log(feature.values_.district);
-      console.log(feature.values_.geometry.extent_);
-      let center = [
-        feature.values_.geometry.extent_[0],
-        feature.values_.geometry.extent_[1],
-      ];
-      map.getView().setCenter(center);
-    }
-  });
+  }
+
   useEffect(() => {
     let options = {
       view: new ol.View({ zoom, center, extent, projection }),
